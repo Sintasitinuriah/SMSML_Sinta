@@ -2,6 +2,7 @@ import sys, os, time
 import mlflow
 import mlflow.sklearn
 import dagshub
+import joblib
 import pandas as pd
 import numpy as np
 from sklearn.pipeline import Pipeline
@@ -77,3 +78,9 @@ with mlflow.start_run(run_name="ManualLog - LinearRegression"):
 
     print(f"MAE: {mae:.4f}, MSE: {mse:.4f}, RMSE: {rmse:.4f}, R²: {r2:.4f}")
     print(f"Explained Variance: {explained_var:.4f}, Max Error: {max_err:.4f}, Training Time: {training_time:.2f}s")
+    
+# Save model to outputs folder for Git LFS
+output_path = "C:/Users/Sinta/Documents/Larskar AI/Submission/Membangun Machine Learning/Eksperimen_SML_Sinta-Siti-Nuriah/Workflow-CI/models/linear_model.pkl"
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
+joblib.dump(pipeline, output_path)
+print(f"Model saved to: {output_path}")

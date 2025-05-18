@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <title>Prediksi Penjualan Big Mart</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        .table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        .table, .table th, .table td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        .table th { background-color: #f2f2f2; }
+        form { margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+    <h1>📈 Prediksi Penjualan Big Mart</h1>
+
+    <!-- Form Input Manual -->
+    <h2>Input Manual</h2>
+    <form method="POST" action="/predict">
+        <label>Item Weight:</label>
+        <input type="number" step="any" name="Item_Weight" required><br>
+
+        <label>Item Visibility:</label>
+        <input type="number" step="any" name="Item_Visibility" required><br>
+
+        <label>Item MRP:</label>
+        <input type="number" step="any" name="Item_MRP" required><br>
+
+        <label>Outlet Establishment Year:</label>
+        <input type="number" name="Outlet_Establishment_Year" required><br>
+
+        <label>Item Fat Content:</label>
+        <input type="text" name="Item_Fat_Content" required><br>
+
+        <label>Outlet Size:</label>
+        <input type="text" name="Outlet_Size" required><br>
+
+        <label>Item Type:</label>
+        <input type="text" name="Item_Type" required><br>
+
+        <label>Outlet Location Type:</label>
+        <input type="text" name="Outlet_Location_Type" required><br>
+
+        <label>Outlet Type:</label>
+        <input type="text" name="Outlet_Type" required><br>
+
+        <label>Outlet Identifier:</label>
+        <input type="text" name="Outlet_Identifier" required><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <h3>Hasil Prediksi: {{ prediction_text }}</h3>
+    {% endif %}
+
+    <hr>
+
+    <!-- Form Upload CSV -->
+    <h2>Upload CSV untuk Prediksi Banyak Data</h2>
+    <form action="/predict_csv" method="post" enctype="multipart/form-data">
+        <label>Upload file CSV:</label>
+        <input type="file" name="file" accept=".csv" required>
+        <input type="submit" value="Prediksi CSV">
+    </form>
+
+    {% if tables %}
+        <h2>✅ Hasil Prediksi dari CSV:</h2>
+        {{ tables|safe }}
+    {% endif %}
+</body>
+</html>
